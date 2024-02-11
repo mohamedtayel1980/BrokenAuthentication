@@ -1,0 +1,12 @@
+.vs/
+bin/
+obj/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.dbmdl
+*.jfm
+log/
+*.log
+*.vscode/
