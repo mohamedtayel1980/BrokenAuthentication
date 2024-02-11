@@ -12,18 +12,23 @@ namespace BrokenAuthenticationSample.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<AccountController> _logger;
         private readonly IEmailSender _emailSender;
+
         public AccountController(
-     UserManager<IdentityUser> userManager,
-     SignInManager<IdentityUser> signInManager,
-     ILogger<AccountController> logger, IEmailSender emailSender)
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            ILogger<AccountController> logger,
+            IEmailSender emailSender)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _logger = logger;
-            _emailSender = emailSender;
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _emailSender = emailSender ?? throw new ArgumentNullException(nameof(emailSender));
         }
 
         // GET: /Account/Login
+        #region Login / Logout
+
+        [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -35,100 +40,82 @@ namespace BrokenAuthenticationSample.Controllers
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
-
-                if (result.Succeeded)
-                {
-                    var user = await _userManager.FindByEmailAsync(model.Email);
-                    if (await _userManager.GetTwoFactorEnabledAsync(user))
-                    {
-                        var token = await _userManager.GenerateTwoFactorTokenAsync(user, TokenOptions.DefaultEmailProvider);
-                        await _emailSender.SendEmailAsync(email: user.Email, subject: "Your MFA Code", htmlMessage: $"Your MFA code is: {token}");
-                        _logger.LogInformation($"MFA token: {token}");
-
-                        return RedirectToAction(nameof(VerifyMfaCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                    }
-
-                    await _signInManager.SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
-                }
-
-                if (result.IsLockedOut)
-                {
-                    // Log lockout
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToAction(nameof(Lockout));
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
-                }
+                return View(model);
             }
 
-            // If we got this far, something failed, redisplay form
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("User logged in.");
+                return RedirectToLocal(returnUrl);
+            }
+
+            if (result.IsLockedOut)
+            {
+                _logger.LogWarning("User account locked out.");
+                return RedirectToAction(nameof(Lockout));
+            }
+
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             return View(model);
         }
 
-        private IActionResult RedirectToLocal(string returnUrl)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        public IActionResult Lockout()
-        {
-            return View();
-        }
+        #endregion
 
+        #region Registration
+
+        [HttpGet]
         public IActionResult Register()
         {
-           
             return View();
         }
-        // POST: /Account/Register
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
-                    //return RedirectToAction(nameof(HomeController.Index), "Home");
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                return View(model);
             }
 
-            // If we got this far, something failed, redisplay form
+            var user = new IdentityUser { UserName = model.Email, Email = model.Email, TwoFactorEnabled = true };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                await _emailSender.SendEmailAsync(model.Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                return RedirectToAction(nameof(ConfirmEmail), new { userId = user.Id, code = code });
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
             return View(model);
         }
+
+        #endregion      
+
+        #region Email Confirmation
+
         [HttpGet]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(code))
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
@@ -140,60 +127,12 @@ namespace BrokenAuthenticationSample.Controllers
             }
 
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            if (!result.Succeeded)
-            {
-                throw new InvalidOperationException($"Error confirming email for user with ID '{userId}':");
-            }
-
-            return View("ConfirmEmailConfirmation");
+            return result.Succeeded ? View("ConfirmEmailConfirmation") : View("Error");
         }
 
-        // POST: /Account/Logout
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(HomeController.Index), "Home");
-        }
+        #endregion
 
-        public async Task<IActionResult> VerifyMfaCode(string returnUrl = null, bool rememberMe = false)
-        {
-            // View model to capture the MFA code
-            return View(new VerifyMfaViewModel { ReturnUrl = returnUrl, RememberMe = rememberMe });
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> VerifyMfaCode(VerifyMfaViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-            if (user == null)
-            {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
-            }
-
-            var result = await _signInManager.TwoFactorSignInAsync(TokenOptions.DefaultEmailProvider, model.Code, model.RememberMe, rememberClient: false);
-            if (result.Succeeded)
-            {
-                return RedirectToLocal(model.ReturnUrl);
-            }
-            else if (result.IsLockedOut)
-            {
-                _logger.LogWarning("User account locked out.");
-                return RedirectToAction(nameof(Lockout));
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid code.");
-                return View(model);
-            }
-        }
+        #region Password Reset
 
         [HttpGet]
         public IActionResult ForgotPassword()
@@ -243,7 +182,7 @@ namespace BrokenAuthenticationSample.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                
+
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
@@ -265,6 +204,69 @@ namespace BrokenAuthenticationSample.Controllers
         {
             return View();
         }
+
+        #endregion
+
+        #region Verify Mfa Code
+        public async Task<IActionResult> VerifyMfaCode(string returnUrl = null, bool rememberMe = false)
+        {
+            // View model to capture the MFA code
+            return View(new VerifyMfaViewModel { ReturnUrl = returnUrl, RememberMe = rememberMe });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> VerifyMfaCode(VerifyMfaViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+            if (user == null)
+            {
+                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+            }
+
+            var result = await _signInManager.TwoFactorSignInAsync(TokenOptions.DefaultEmailProvider, model.Code, model.RememberMe, rememberClient: false);
+            if (result.Succeeded)
+            {
+                return RedirectToLocal(model.ReturnUrl);
+            }
+            else if (result.IsLockedOut)
+            {
+                _logger.LogWarning("User account locked out.");
+                return RedirectToAction(nameof(Lockout));
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid code.");
+                return View(model);
+            }
+        }
+        #endregion
+
+        #region Helpers
+
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+        }
+
+        public IActionResult Lockout()
+        {
+            return View();
+        }
+
+        #endregion
 
 
 
