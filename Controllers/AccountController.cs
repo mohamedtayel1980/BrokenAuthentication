@@ -91,7 +91,11 @@ namespace BrokenAuthenticationSample.Controllers
             return View();
         }
 
-
+        public IActionResult Register()
+        {
+           
+            return View();
+        }
         // POST: /Account/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -120,6 +124,28 @@ namespace BrokenAuthenticationSample.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userId}'.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException($"Error confirming email for user with ID '{userId}':");
+            }
+
+            return View("ConfirmEmailConfirmation");
         }
 
         // POST: /Account/Logout
