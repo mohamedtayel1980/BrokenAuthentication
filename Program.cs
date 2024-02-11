@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BrokenAuthenticationSample.Data;
 using Microsoft.AspNetCore.CookiePolicy;
+using BrokenAuthenticationSample.Contract.Email;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BrokenAuthenticationSampleContextConnection") ?? throw new InvalidOperationException("Connection string 'BrokenAuthenticationSampleContextConnection' not found.");
 
@@ -11,6 +12,15 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+var sendGridKey = builder.Configuration["SendGridKey"];
+if (string.IsNullOrEmpty(sendGridKey))
+{
+    throw new InvalidOperationException("SendGridKey is not configured.");
+}
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

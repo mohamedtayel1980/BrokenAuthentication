@@ -2,7 +2,7 @@
 
 namespace BrokenAuthenticationSample.ViewModels
 {
-    public class LoginViewModel
+    public class ResetPasswordViewModel
     {
         [Required]
         [EmailAddress]
@@ -12,7 +12,11 @@ namespace BrokenAuthenticationSample.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public bool RememberMe { get; set; }
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        public string Code { get; set; }
     }
 
 

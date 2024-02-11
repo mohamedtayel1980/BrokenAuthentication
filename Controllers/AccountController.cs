@@ -1,6 +1,8 @@
-﻿using BrokenAuthenticationSample.ViewModels;
+﻿using BrokenAuthenticationSample.Contract.Email;
+using BrokenAuthenticationSample.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Encodings.Web;
 
 namespace BrokenAuthenticationSample.Controllers
 {
@@ -9,15 +11,16 @@ namespace BrokenAuthenticationSample.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<AccountController> _logger;
-
+        private readonly IEmailSender _emailSender;
         public AccountController(
      UserManager<IdentityUser> userManager,
      SignInManager<IdentityUser> signInManager,
-     ILogger<AccountController> logger)
+     ILogger<AccountController> logger, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _emailSender = emailSender;
         }
 
         // GET: /Account/Login
@@ -44,7 +47,7 @@ namespace BrokenAuthenticationSample.Controllers
                     if (await _userManager.GetTwoFactorEnabledAsync(user))
                     {
                         var token = await _userManager.GenerateTwoFactorTokenAsync(user, TokenOptions.DefaultEmailProvider);
-                        // Ideally, you should send the token via email. For demonstration, let's log it
+                        await _emailSender.SendEmailAsync(email: user.Email, subject: "Your MFA Code", htmlMessage: $"Your MFA code is: {token}");
                         _logger.LogInformation($"MFA token: {token}");
 
                         return RedirectToAction(nameof(VerifyMfaCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
@@ -100,8 +103,14 @@ namespace BrokenAuthenticationSample.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    //return RedirectToAction(nameof(HomeController.Index), "Home");
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
                 }
                 foreach (var error in result.Errors)
                 {
@@ -159,6 +168,79 @@ namespace BrokenAuthenticationSample.Controllers
                 return View(model);
             }
         }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                // Only send the email if the user exists and is confirmed.
+                if (user != null && await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var callbackUrl = Url.Action(nameof(ResetPassword), "Account", new { code = code }, protocol: HttpContext.Request.Scheme);
+
+                    await _emailSender.SendEmailAsync(model.Email, "Reset Password",
+                        $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                }
+
+                // Regardless of user existence or confirmation status, redirect to a generic confirmation view.
+                return RedirectToAction(nameof(ForgotPasswordConfirmation));
+            }
+
+            // If we got this far, something failed, redisplay form.
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string code = null)
+        {
+            // Ensure the code is passed to the view for submission with the form
+            return code == null ? View("Error") : View(new ResetPasswordViewModel { Code = code });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                
+                return RedirectToAction(nameof(ResetPasswordConfirmation));
+            }
+            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(ResetPasswordConfirmation));
+            }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+            return View(model);
+        }
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+
+
 
 
     }
