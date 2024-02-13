@@ -97,7 +97,8 @@ namespace BrokenAuthenticationSample.Controllers
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                 await _emailSender.SendEmailAsync(model.Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-                return RedirectToAction(nameof(ConfirmEmail), new { userId = user.Id, code = code });
+                // Redirect to the success message view
+                return View("RegistrationSuccess");
             }
 
             foreach (var error in result.Errors)

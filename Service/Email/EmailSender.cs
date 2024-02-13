@@ -1,38 +1,44 @@
 ﻿using BrokenAuthenticationSample.Contract.Email;
-using BrokenAuthenticationSample.Controllers;
-using NuGet.Common;
-using SendGrid;
-using SendGrid.Helpers.Mail;
-
+using BrokenAuthenticationSample.Helper;
+using Microsoft.Extensions.Options;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 public class EmailSender : IEmailSender
 {
-    private readonly SendGridClient _client;
-    private readonly EmailAddress _fromAddress;
+
     private readonly ILogger<EmailSender> _logger;
-
-    public EmailSender(IConfiguration configuration, ILogger<EmailSender> logger)
+    private readonly SmtpSettings _smtpSettings;
+    public EmailSender(IOptions<SmtpSettings> smtpSettings, ILogger<EmailSender> logger)
     {
-        var apiKey = configuration.GetValue<string>("SendGridKey");
+
         _logger = logger;
-        if (string.IsNullOrWhiteSpace(apiKey))
-        {
-            throw new ArgumentException("SendGrid API key is not configured.");
-        }
-
-        _client = new SendGridClient(apiKey);
-
-        var fromEmail = configuration.GetValue<string>("EmailSettings:SenderEmail");
-        var fromName = configuration.GetValue<string>("EmailSettings:SenderName");
-        _fromAddress = new EmailAddress(fromEmail, fromName);
+        _smtpSettings = smtpSettings.Value;
     }
 
-    public ILogger<EmailSender> Logger => _logger;
 
-    public async Task SendEmailAsync(string toEmail, string subject, string htmlMessage)
+
+    public async Task SendEmailAsync(string toEmail, string subject, string message)
     {
-        var to = new EmailAddress(toEmail);
-        var msg = MailHelper.CreateSingleEmail(_fromAddress, to, subject, "", htmlMessage);
-        var response = await _client.SendEmailAsync(msg);
-        _logger.LogInformation($"MFA token: {response}");
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        var smtpClient = new SmtpClient(_smtpSettings.Server)
+        {
+            Port = _smtpSettings.Port,
+            Credentials = new NetworkCredential(_smtpSettings.Username, _smtpSettings.Password),
+            UseDefaultCredentials = _smtpSettings.SMTPAuthentication,
+            EnableSsl = _smtpSettings.EnableSsl,
+            DeliveryMethod = SmtpDeliveryMethod.Network
+        };
+
+        var mailMessage = new MailMessage
+        {
+            From = new MailAddress(_smtpSettings.FromAddress, _smtpSettings.FromName),
+            Subject = subject,
+            Body = message,
+            IsBodyHtml = true,
+        };
+        mailMessage.To.Add(toEmail);
+
+        await smtpClient.SendMailAsync(mailMessage);
     }
 }

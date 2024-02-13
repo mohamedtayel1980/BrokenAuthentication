@@ -3,10 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using BrokenAuthenticationSample.Data;
 using Microsoft.AspNetCore.CookiePolicy;
 using BrokenAuthenticationSample.Contract.Email;
+using Serilog;
+using BrokenAuthenticationSample.Helper;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BrokenAuthenticationSampleContextConnection") ?? throw new InvalidOperationException("Connection string 'BrokenAuthenticationSampleContextConnection' not found.");
-
+// Configure Serilog
+builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.Console()
+    .WriteTo.File($"logs/log.txt", rollingInterval: RollingInterval.Day));
 builder.Services.AddDbContext<BrokenAuthenticationSampleContext>(options => options.UseSqlServer(connectionString));
+// Bind SMTP settings
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BrokenAuthenticationSampleContext>();
 

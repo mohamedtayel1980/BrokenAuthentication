@@ -1,0 +1,163 @@
+2024-02-13 11:59:10.469 +02:00 [INF] User profile is available. Using 'C:\Users\mtayel\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-02-13 11:59:11.165 +02:00 [INF] Now listening on: https://localhost:7280
+2024-02-13 11:59:11.167 +02:00 [INF] Now listening on: http://localhost:5232
+2024-02-13 11:59:11.169 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-02-13 11:59:11.171 +02:00 [INF] Hosting environment: Development
+2024-02-13 11:59:11.172 +02:00 [INF] Content root path: D:\CodeMaz\Dev.to\Broken Authentication\BrokenAuthenticationSample
+2024-02-13 11:59:12.485 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/ - null null
+2024-02-13 11:59:12.648 +02:00 [INF] Executing endpoint 'BrokenAuthenticationSample.Controllers.HomeController.Index (BrokenAuthenticationSample)'
+2024-02-13 11:59:12.694 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller BrokenAuthenticationSample.Controllers.HomeController (BrokenAuthenticationSample).
+2024-02-13 11:59:12.713 +02:00 [INF] Executing ViewResult, running view Index.
+2024-02-13 11:59:12.805 +02:00 [INF] Executed ViewResult - view Index executed in 96.8641ms.
+2024-02-13 11:59:12.808 +02:00 [INF] Executed action BrokenAuthenticationSample.Controllers.HomeController.Index (BrokenAuthenticationSample) in 109.1849ms
+2024-02-13 11:59:12.811 +02:00 [INF] Executed endpoint 'BrokenAuthenticationSample.Controllers.HomeController.Index (BrokenAuthenticationSample)'
+2024-02-13 11:59:12.817 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/ - 200 null text/html; charset=utf-8 338.125ms
+2024-02-13 11:59:12.830 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0 - null null
+2024-02-13 11:59:12.831 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/lib/bootstrap/dist/js/bootstrap.bundle.min.js - null null
+2024-02-13 11:59:12.830 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/lib/bootstrap/dist/css/bootstrap.min.css - null null
+2024-02-13 11:59:12.830 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/BrokenAuthenticationSample.styles.css?v=PEW1dWGhAuejEcppW-eVHP-2cdyF8trCvFnt-JJ3P2o - null null
+2024-02-13 11:59:12.834 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/lib/jquery/dist/jquery.min.js - null null
+2024-02-13 11:59:12.844 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - null null
+2024-02-13 11:59:12.855 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo - null null
+2024-02-13 11:59:12.874 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_vs/browserLink - null null
+2024-02-13 11:59:12.880 +02:00 [INF] The file /lib/bootstrap/dist/js/bootstrap.bundle.min.js was not modified
+2024-02-13 11:59:12.880 +02:00 [INF] The file /lib/bootstrap/dist/css/bootstrap.min.css was not modified
+2024-02-13 11:59:12.880 +02:00 [INF] The file /css/site.css was not modified
+2024-02-13 11:59:12.882 +02:00 [INF] The file /BrokenAuthenticationSample.styles.css was not modified
+2024-02-13 11:59:12.927 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/lib/bootstrap/dist/js/bootstrap.bundle.min.js - 304 null text/javascript 95.959ms
+2024-02-13 11:59:12.928 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/lib/bootstrap/dist/css/bootstrap.min.css - 304 null text/css 97.9739ms
+2024-02-13 11:59:12.930 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0 - 304 null text/css 100.1188ms
+2024-02-13 11:59:12.936 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/BrokenAuthenticationSample.styles.css?v=PEW1dWGhAuejEcppW-eVHP-2cdyF8trCvFnt-JJ3P2o - 304 null text/css 105.8782ms
+2024-02-13 11:59:12.884 +02:00 [INF] The file /lib/jquery/dist/jquery.min.js was not modified
+2024-02-13 11:59:12.888 +02:00 [INF] The file /js/site.js was not modified
+2024-02-13 11:59:12.926 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - 200 13788 application/javascript; charset=utf-8 83.5725ms
+2024-02-13 11:59:12.971 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/lib/jquery/dist/jquery.min.js - 304 null text/javascript 138.8116ms
+2024-02-13 11:59:12.972 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo - 304 null text/javascript 118.7779ms
+2024-02-13 11:59:13.001 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_vs/browserLink - 200 null text/javascript; charset=UTF-8 128.4664ms
+2024-02-13 11:59:17.809 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/Account/Register - null null
+2024-02-13 11:59:17.819 +02:00 [INF] Executing endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 11:59:17.821 +02:00 [INF] Route matched with {action = "Register", controller = "Account", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Register() on controller BrokenAuthenticationSample.Controllers.AccountController (BrokenAuthenticationSample).
+2024-02-13 11:59:18.156 +02:00 [INF] Executing ViewResult, running view Register.
+2024-02-13 11:59:18.192 +02:00 [INF] Executed ViewResult - view Register executed in 37.2468ms.
+2024-02-13 11:59:18.200 +02:00 [INF] Executed action BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample) in 375.5905ms
+2024-02-13 11:59:18.204 +02:00 [INF] Executed endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 11:59:18.210 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/Account/Register - 200 null text/html; charset=utf-8 401.5938ms
+2024-02-13 11:59:18.216 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_vs/browserLink - null null
+2024-02-13 11:59:18.216 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - null null
+2024-02-13 11:59:18.227 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - 200 13788 application/javascript; charset=utf-8 10.889ms
+2024-02-13 11:59:18.239 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_vs/browserLink - 200 null text/javascript; charset=UTF-8 22.9393ms
+2024-02-13 12:00:33.326 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7280/Account/Register - application/x-www-form-urlencoded 262
+2024-02-13 12:00:33.342 +02:00 [INF] Executing endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:00:33.351 +02:00 [INF] Route matched with {action = "Register", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(BrokenAuthenticationSample.ViewModels.RegisterViewModel) on controller BrokenAuthenticationSample.Controllers.AccountController (BrokenAuthenticationSample).
+2024-02-13 12:00:33.382 +02:00 [INF] Executing ViewResult, running view Register.
+2024-02-13 12:00:33.388 +02:00 [INF] Executed ViewResult - view Register executed in 6.846ms.
+2024-02-13 12:00:33.395 +02:00 [INF] Executed action BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample) in 42.2069ms
+2024-02-13 12:00:33.398 +02:00 [INF] Executed endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:00:33.399 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7280/Account/Register - 200 null text/html; charset=utf-8 73.225ms
+2024-02-13 12:00:33.411 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_vs/browserLink - null null
+2024-02-13 12:00:33.411 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - null null
+2024-02-13 12:00:33.420 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - 200 13788 application/javascript; charset=utf-8 9.0674ms
+2024-02-13 12:00:33.429 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_vs/browserLink - 200 null text/javascript; charset=UTF-8 18.1574ms
+2024-02-13 12:00:47.523 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7280/Account/Register - application/x-www-form-urlencoded 262
+2024-02-13 12:00:47.529 +02:00 [INF] Executing endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:00:47.530 +02:00 [INF] Route matched with {action = "Register", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(BrokenAuthenticationSample.ViewModels.RegisterViewModel) on controller BrokenAuthenticationSample.Controllers.AccountController (BrokenAuthenticationSample).
+2024-02-13 12:00:47.543 +02:00 [INF] Executing ViewResult, running view Register.
+2024-02-13 12:00:47.551 +02:00 [INF] Executed ViewResult - view Register executed in 7.9774ms.
+2024-02-13 12:00:47.553 +02:00 [INF] Executed action BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample) in 19.8965ms
+2024-02-13 12:00:47.554 +02:00 [INF] Executed endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:00:47.556 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7280/Account/Register - 200 null text/html; charset=utf-8 33.3615ms
+2024-02-13 12:00:47.568 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_vs/browserLink - null null
+2024-02-13 12:00:47.569 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - null null
+2024-02-13 12:00:47.580 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - 200 13788 application/javascript; charset=utf-8 11.4941ms
+2024-02-13 12:00:47.594 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_vs/browserLink - 200 null text/javascript; charset=UTF-8 26.8417ms
+2024-02-13 12:01:18.101 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7280/Account/Register - application/x-www-form-urlencoded 274
+2024-02-13 12:01:18.117 +02:00 [INF] Executing endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:01:18.120 +02:00 [INF] Route matched with {action = "Register", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(BrokenAuthenticationSample.ViewModels.RegisterViewModel) on controller BrokenAuthenticationSample.Controllers.AccountController (BrokenAuthenticationSample).
+2024-02-13 12:01:18.131 +02:00 [INF] Executing ViewResult, running view Register.
+2024-02-13 12:01:18.137 +02:00 [INF] Executed ViewResult - view Register executed in 6.7214ms.
+2024-02-13 12:01:18.145 +02:00 [INF] Executed action BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample) in 15.3735ms
+2024-02-13 12:01:18.148 +02:00 [INF] Executed endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:01:18.150 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7280/Account/Register - 200 null text/html; charset=utf-8 49.3068ms
+2024-02-13 12:01:18.177 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - null null
+2024-02-13 12:01:18.178 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_vs/browserLink - null null
+2024-02-13 12:01:18.188 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - 200 13788 application/javascript; charset=utf-8 12.2635ms
+2024-02-13 12:01:18.226 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_vs/browserLink - 200 null text/javascript; charset=UTF-8 50.3379ms
+2024-02-13 12:01:43.933 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7280/Account/Register - application/x-www-form-urlencoded 272
+2024-02-13 12:01:43.944 +02:00 [INF] Executing endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:01:43.949 +02:00 [INF] Route matched with {action = "Register", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(BrokenAuthenticationSample.ViewModels.RegisterViewModel) on controller BrokenAuthenticationSample.Controllers.AccountController (BrokenAuthenticationSample).
+2024-02-13 12:01:46.089 +02:00 [INF] Executed DbCommand (49ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-02-13 12:01:46.241 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2024-02-13 12:01:47.197 +02:00 [INF] MFA token: SendGrid.Response
+2024-02-13 12:01:47.201 +02:00 [INF] Executing RedirectResult, redirecting to /Account/ConfirmEmail?userId=e3ec6f95-593a-4ce7-96b8-1eb47b8f5aaa&code=CfDJ8K3nl6E1DU5EqYzkFiIxT1ttBwi112Ti2%2FnRZ1zs9n1ndjhxdV%2FztPz5%2FymAtyg3kK0uQhZ3d4jhqkGZsYCQGcIuOZOghNYgHfrHOUvQplhh8f%2BJNkQdMvCkGTmT9jgnVZ7%2F3lWAsYekIgVpjRsg8vROolC%2Fc58obR%2B3wJnqPM5S7psmPeUj9cd5bMaB3TiEkk0Wk73KGqMCGqIZKABgfRhYNXVc%2FBJ92pC8mO9Fiw1mG3wHAV%2FJDgPSTfOsXsjhlQ%3D%3D.
+2024-02-13 12:01:47.202 +02:00 [INF] Executed action BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample) in 3250.9546ms
+2024-02-13 12:01:47.203 +02:00 [INF] Executed endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:01:47.208 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7280/Account/Register - 302 0 null 3275.7886ms
+2024-02-13 12:01:47.209 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/Account/ConfirmEmail?userId=e3ec6f95-593a-4ce7-96b8-1eb47b8f5aaa&code=CfDJ8K3nl6E1DU5EqYzkFiIxT1ttBwi112Ti2%2FnRZ1zs9n1ndjhxdV%2FztPz5%2FymAtyg3kK0uQhZ3d4jhqkGZsYCQGcIuOZOghNYgHfrHOUvQplhh8f%2BJNkQdMvCkGTmT9jgnVZ7%2F3lWAsYekIgVpjRsg8vROolC%2Fc58obR%2B3wJnqPM5S7psmPeUj9cd5bMaB3TiEkk0Wk73KGqMCGqIZKABgfRhYNXVc%2FBJ92pC8mO9Fiw1mG3wHAV%2FJDgPSTfOsXsjhlQ%3D%3D - null null
+2024-02-13 12:01:47.215 +02:00 [INF] Executing endpoint 'BrokenAuthenticationSample.Controllers.AccountController.ConfirmEmail (BrokenAuthenticationSample)'
+2024-02-13 12:01:47.219 +02:00 [INF] Route matched with {action = "ConfirmEmail", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ConfirmEmail(System.String, System.String) on controller BrokenAuthenticationSample.Controllers.AccountController (BrokenAuthenticationSample).
+2024-02-13 12:01:47.285 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2024-02-13 12:01:47.303 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-02-13 12:01:47.329 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[@p14='?' (Size = 450), @p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p15='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTimeOffset), @p6='?' (Size = 256), @p7='?' (Size = 256), @p8='?' (Size = 4000), @p9='?' (Size = 4000), @p10='?' (DbType = Boolean), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p0, [ConcurrencyStamp] = @p1, [Email] = @p2, [EmailConfirmed] = @p3, [LockoutEnabled] = @p4, [LockoutEnd] = @p5, [NormalizedEmail] = @p6, [NormalizedUserName] = @p7, [PasswordHash] = @p8, [PhoneNumber] = @p9, [PhoneNumberConfirmed] = @p10, [SecurityStamp] = @p11, [TwoFactorEnabled] = @p12, [UserName] = @p13
+OUTPUT 1
+WHERE [Id] = @p14 AND [ConcurrencyStamp] = @p15;
+2024-02-13 12:01:47.338 +02:00 [INF] Executing ViewResult, running view ConfirmEmailConfirmation.
+2024-02-13 12:01:47.341 +02:00 [INF] Executed ViewResult - view ConfirmEmailConfirmation executed in 4.0284ms.
+2024-02-13 12:01:47.343 +02:00 [INF] Executed action BrokenAuthenticationSample.Controllers.AccountController.ConfirmEmail (BrokenAuthenticationSample) in 122.5846ms
+2024-02-13 12:01:47.344 +02:00 [INF] Executed endpoint 'BrokenAuthenticationSample.Controllers.AccountController.ConfirmEmail (BrokenAuthenticationSample)'
+2024-02-13 12:01:47.347 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/Account/ConfirmEmail?userId=e3ec6f95-593a-4ce7-96b8-1eb47b8f5aaa&code=CfDJ8K3nl6E1DU5EqYzkFiIxT1ttBwi112Ti2%2FnRZ1zs9n1ndjhxdV%2FztPz5%2FymAtyg3kK0uQhZ3d4jhqkGZsYCQGcIuOZOghNYgHfrHOUvQplhh8f%2BJNkQdMvCkGTmT9jgnVZ7%2F3lWAsYekIgVpjRsg8vROolC%2Fc58obR%2B3wJnqPM5S7psmPeUj9cd5bMaB3TiEkk0Wk73KGqMCGqIZKABgfRhYNXVc%2FBJ92pC8mO9Fiw1mG3wHAV%2FJDgPSTfOsXsjhlQ%3D%3D - 200 null text/html; charset=utf-8 137.837ms
+2024-02-13 12:01:47.361 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - null null
+2024-02-13 12:01:47.361 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_vs/browserLink - null null
+2024-02-13 12:01:47.366 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - 200 13788 application/javascript; charset=utf-8 4.8868ms
+2024-02-13 12:01:47.394 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_vs/browserLink - 200 null text/javascript; charset=UTF-8 33.1242ms
+2024-02-13 12:01:56.317 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/Account/Login - null null
+2024-02-13 12:01:56.324 +02:00 [INF] Executing endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Login (BrokenAuthenticationSample)'
+2024-02-13 12:01:56.326 +02:00 [INF] Route matched with {action = "Login", controller = "Account", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login(System.String) on controller BrokenAuthenticationSample.Controllers.AccountController (BrokenAuthenticationSample).
+2024-02-13 12:01:56.330 +02:00 [INF] Executing ViewResult, running view Login.
+2024-02-13 12:01:56.343 +02:00 [INF] Executed ViewResult - view Login executed in 13.429ms.
+2024-02-13 12:01:56.346 +02:00 [INF] Executed action BrokenAuthenticationSample.Controllers.AccountController.Login (BrokenAuthenticationSample) in 16.5743ms
+2024-02-13 12:01:56.348 +02:00 [INF] Executed endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Login (BrokenAuthenticationSample)'
+2024-02-13 12:01:56.349 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/Account/Login - 200 null text/html; charset=utf-8 32.1594ms
+2024-02-13 12:01:56.368 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_vs/browserLink - null null
+2024-02-13 12:01:56.368 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - null null
+2024-02-13 12:01:56.379 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - 200 13788 application/javascript; charset=utf-8 10.6423ms
+2024-02-13 12:01:56.396 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_vs/browserLink - 200 null text/javascript; charset=UTF-8 27.8579ms
+2024-02-13 12:02:50.706 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/Account/Register - null null
+2024-02-13 12:02:50.725 +02:00 [INF] Executing endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:02:50.726 +02:00 [INF] Route matched with {action = "Register", controller = "Account", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Register() on controller BrokenAuthenticationSample.Controllers.AccountController (BrokenAuthenticationSample).
+2024-02-13 12:02:50.729 +02:00 [INF] Executing ViewResult, running view Register.
+2024-02-13 12:02:50.734 +02:00 [INF] Executed ViewResult - view Register executed in 5.1549ms.
+2024-02-13 12:02:50.742 +02:00 [INF] Executed action BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample) in 12.9436ms
+2024-02-13 12:02:50.744 +02:00 [INF] Executed endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:02:50.745 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/Account/Register - 200 null text/html; charset=utf-8 40.1645ms
+2024-02-13 12:02:50.756 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - null null
+2024-02-13 12:02:50.756 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7280/_vs/browserLink - null null
+2024-02-13 12:02:50.759 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_framework/aspnetcore-browser-refresh.js - 200 13788 application/javascript; charset=utf-8 3.2369ms
+2024-02-13 12:02:50.776 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7280/_vs/browserLink - 200 null text/javascript; charset=UTF-8 19.6129ms
+2024-02-13 12:03:13.064 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7280/Account/Register - application/x-www-form-urlencoded 272
+2024-02-13 12:03:13.071 +02:00 [INF] Executing endpoint 'BrokenAuthenticationSample.Controllers.AccountController.Register (BrokenAuthenticationSample)'
+2024-02-13 12:03:13.072 +02:00 [INF] Route matched with {action = "Register", controller = "Account", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(BrokenAuthenticationSample.ViewModels.RegisterViewModel) on controller BrokenAuthenticationSample.Controllers.AccountController (BrokenAuthenticationSample).
+2024-02-13 12:03:13.153 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-02-13 12:03:13.160 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
